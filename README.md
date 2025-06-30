@@ -1,17 +1,54 @@
-Trabalho para disciplina Introdução a python - Ciencia de Dados.
+📌 PROJETO – DASHBOARD COM DADOS DO RECLAME AQUI
 ===
 
-Projeto de T1 - Contratos de Energia.
-===
+MBA em Ciência de Dados – Disciplina: Dashboards em Python
+---
+Prof. Túlio Ribeiro
 
-Atividade
-===
 
-Dado um arquivo de entrada, implemente um algoritmo que inicialize uma matriz tridimensional
-que armazene os valores dos contratos de energia. A matriz deve ter as dimensões n × (m + 1) ×
-(m + 1), onde cada elemento contratos[fornecedor][inicio][fim] representa o valor do contrato
-oferecido pelo fornecedor para o período do mês inicial ao mês final. Se não houver contrato
-específico para esse período, o valor deve ser ∞ (infinito).
+**Descrição**
+---
+
+* O objetivo é criar um painel interativo com **Dash** ou **Streamlit** utilizando dados de reclamações do Reclame Aqui.
+* Cada equipe deverá escolher **uma** das seguintes empresas para análise: **Hapvida**, **Nagem** ou **Ibyte**.
+* Será permitido o uso de outro dataset similar aos disponibilizados, a critério da equipe.
+* A equipe deverá ser composta por no máximo 4 integrantes.
+* A entrega do trabalho consiste em:
+
+  * O **deploy da aplicação** (ver seção abaixo);
+  * Um **vídeo de até 5 minutos** explicando o funcionamento do dashboard e os principais insights obtidos.
+
+    > **Obs:** Não é obrigatório que todos os membros da equipe falem no vídeo — isso fica a critério do grupo.
+
+### **O painel deve conter**
+
+* **Série temporal** do número de reclamações.
+* **Frequência de reclamações por estado.**
+* **Frequência por tipo de** `STATUS`.
+* **Distribuição do tamanho dos textos** das reclamações (coluna `DESCRIÇÃO`).
+* **WordCloud** com as palavras mais frequentes nos textos das descrições.
+* **Mapa do Brasil com heatmap** mostrando a quantidade de reclamações por **ano**, com granularidade por **estado ou município**.
+
+  > O mapa **deve conter um seletor para o ano** que será visualizado.
+
+### **Os gráficos devem ser interativos e filtráveis com seletores de:**
+
+* Estado
+* Status
+* Faixa de tamanho do texto da reclamação
+
+### **Deploy da aplicação**
+
+**Tutoriais para deploy com Streamlit:**
+
+* [https://youtu.be/vw0I8i7QJRk?si=LthbxLEMj3d\_TXZC](https://youtu.be/vw0I8i7QJRk?si=LthbxLEMj3d_TXZC)
+* [https://youtu.be/HKoOBiAaHGg?si=euvQ709gIg3mnjWG](https://youtu.be/HKoOBiAaHGg?si=euvQ709gIg3mnjWG)
+
+**Tutorial para deploy com Dash:**
+
+* [https://youtu.be/H16dZMYmvqo?si=jLhcetE8YxJnTO9x](https://youtu.be/H16dZMYmvqo?si=jLhcetE8YxJnTO9x)
+
+
 
 Tabela de conteúdos
 ---
