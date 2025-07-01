@@ -121,7 +121,7 @@ Código
 
 Trabalhando nisso !!!
 
-### Referências
+Referências
 ---
 
 - [Python Documentação](https://docs.python.org/pt-br/3/)
@@ -129,18 +129,21 @@ Trabalhando nisso !!!
 - [Dash Mantine](https://www.dash-mantine-components.com/)
 
 
-### Contribuições
+Contribuições
+---
 
 - Emerson da Silva Maciel
 - Victor Lamark Costa Brasil
 - Wagner da Costa Oliveira
 
-### Autores
+Autores
+---
 
 - Emerson da Silva Maciel
 - Victor Lamark Costa Brasil
 - Wagner da Costa Oliveira
 
-### Licença
+Licença
+---
 
 - [GNU General Public License (GPL)](https://www.gnu.org/licenses/gpl-3.0.html)

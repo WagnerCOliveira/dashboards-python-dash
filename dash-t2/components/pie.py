@@ -2,7 +2,7 @@ import pandas as pd
 import dash_mantine_components as dmc
 from dash_iconify import DashIconify
 
-from .callbacks import genero
+from components.processamento import genero
 
 df = pd.DataFrame(genero())
 

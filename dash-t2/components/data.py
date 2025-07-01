@@ -3,7 +3,7 @@ from dash import dcc, Input, Output, State, callback, clientside_callback, Patch
 import plotly.express as px
 import plotly.io as pio
 
-from components.callbacks import representatividade_m_f_admis_depar
+from components.processamento import representatividade_m_f_admis_depar
 
 dmc.add_figure_templates(default="mantine_dark")
 

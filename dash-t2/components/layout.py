@@ -1,6 +1,6 @@
 import dash_mantine_components as dmc
 import dash_bootstrap_components as dbc
-from dash import dcc
+from dash import dcc, html
 from dash_iconify import DashIconify
 
 from components import pie, data
@@ -23,21 +23,19 @@ theme_toggle = dmc.Switch(
     color="grey",
 )
 
-
 about = dcc.Markdown("""
-    Trabalho para disciplina Introdução a python - Ciencia de Dados.
+    PROJETO – DASHBOARD COM DADOS DO RECLAME AQUI
+    ---
+                     
+    ### MBA em Ciência de Dados – Disciplina: Dashboards em Python
+    
+    Prof. Túlio Ribeiro
+    
+    ### Descrição    
 
-    Projeto de T2 - O Conjunto de Dados de Admissões de Pós-Graduação de Berkeley em 1973.
-
-    - Levanta questões centrais sobre a equidade nos processos seletivos em instituições de ensino superior. 
-    Os dados, à primeira vista, indicam uma desigualdade de gênero nas admissões, sugerindo que mulheres tinham 
-    menor probabilidade de serem aceitas em comparação aos homens. Essa evidência inicial gerou um debate sobre 
-    a possibilidade de discriminação institucional contra mulheres no ambiente acadêmico
-
-    Atividade
-
-    - Desenvolver uma análise exploratória de dados que identifique padrões e propondo interpretações sobre viés 
-    e desigualdade na admissão de pós-graduação da Universidade de Berkeley em 1973.
+    Painel interativo com **Dash** utilizando dados de reclamações do Reclame Aqui.
+    do **Hapvida**.
+    
     """, style={"width": 450})
 
 def body():
@@ -56,7 +54,7 @@ def body():
                                     opened=False,
                                 ),
                                 dmc.Image(src=logo, h=50),
-                                dmc.Title("Projeto de T2", c="blue"),
+                                dmc.Title("Dashboard - Reclame Aqui", c="blue"),
                             ]
                         ),
                         dmc.Group(
@@ -80,9 +78,8 @@ def body():
             ),
             dmc.AppShellNavbar(
                 id="navbar",
-                p="md",  # Padding geral do Navbar
-                children=[
-                    # Use dmc.Stack para agrupar e espaçar verticalmente os seus componentes
+                p="md",
+                children=[                    
                     dmc.Stack(
                         children=[
                             dmc.MultiSelect(
@@ -100,26 +97,58 @@ def body():
                             dmc.Select(
                                 label='Selecionando po Ano',
                                 placeholder="Filtrar por Ano (mapa)...",
-                                id='seletor-ano',    
+                                id='seletor-ano-mapa',    
                                 clearable=True,                             
                                 data=[{'label': str(ano), 'value': str(ano)} for ano in sorted((df['ANO'].unique()))],                                
                             ),
-                            dmc.Slider(                                
+                            dmc.Text(id='filtro-tamanho-texto-output'),
+                            dmc.RangeSlider(                                
+                                restrictToMarks=False,                                
                                 id='filtro-tamanho-texto', 
                                 min=df['TAMANHO_TEXTO'].min(), 
                                 max=df['TAMANHO_TEXTO'].max(),
-                                value=[df['TAMANHO_TEXTO'].min(), df['TAMANHO_TEXTO'].max()],                                
+                                value=[df['TAMANHO_TEXTO'].min(), df['TAMANHO_TEXTO'].max()],
+                                marks=[
+                                    {'value': df['TAMANHO_TEXTO'].min(), 'label': df['TAMANHO_TEXTO'].min(), },
+                                    {'value': df['TAMANHO_TEXTO'].max(), 'label': df['TAMANHO_TEXTO'].max(), }
+                                ]                                
                             ),
                         ],
                         gap="xl"
                     )
                 ],
             ),
-            dmc.AppShellMain(
-                children= [                 
-                    #pie.StatsRing(),
-                    dmc.MantineProvider(data.layout)                    
-                ]
+            dmc.AppShellMain(    
+                dmc.Grid(
+                    align="stretch",
+                    justify="space-around",                                 
+                    children=[                            
+                        dmc.GridCol(
+                            html.Div(
+                                dcc.Graph(id='grafico-dist-texto'),                                                                
+                            ), span={"base": 12, "md": 6, "lg": 6}),
+                        dmc.GridCol(
+                            html.Div(
+                                dcc.Graph(id='grafico-serie-temporal'),                                
+                            ), span={"base": 12, "md": 6, "lg": 6}),
+                        dmc.GridCol(
+                            html.Div(
+                                dcc.Graph(id='grafico-freq-status'),                                 
+                            ), span={"base": 12, "md": 6, "lg": 6}),
+                        dmc.GridCol(
+                            html.Div(                                
+                                html.Img(id='grafico-wordcloud', className="img-fluid w-100"),                                 
+                            ), span={"base": 12, "md": 6, "lg": 6}),
+                        dmc.GridCol(
+                            html.Div(
+                                dcc.Graph(id='mapa-brasil-heatmap'),                                 
+                            ), span={"base": 12, "md": 6, "lg": 6}),
+                        dmc.GridCol(
+                            html.Div(
+                                dcc.Graph(id='grafico-freq-estado' ),                                 
+                            ), span={"base": 12, "md": 6, "lg": 6}),                        
+                    ] 
+                )        
             ),
         ],
         header={
