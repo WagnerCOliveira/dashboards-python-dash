@@ -1,5 +1,5 @@
 import dash_mantine_components as dmc
-from dash import Dash, Input, Output, State, callback, _dash_renderer
+from dash import Dash, _dash_renderer
 
 from components import layout
 from components.callbacks import *
@@ -11,7 +11,10 @@ _dash_renderer._set_react_version("18.2.0")
 app = Dash(external_stylesheets=dmc.styles.ALL)
 
 
-app.layout = layout.body()
+app.layout = dmc.MantineProvider( 
+    layout.body(),
+    id="theme-provider",
+)
 
 
 if __name__ == "__main__":
