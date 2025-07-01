@@ -3,8 +3,6 @@ import dash_bootstrap_components as dbc
 from dash import dcc, html
 from dash_iconify import DashIconify
 
-from components import pie, data
-
 # ==============================================================================
 # 1. GERAÇÃO DE DADOS ALEATÓRIOS (MOCK DATA)
 # ==============================================================================
