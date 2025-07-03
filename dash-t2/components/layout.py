@@ -1,15 +1,15 @@
+import os
 import dash_mantine_components as dmc
-import dash_bootstrap_components as dbc
+import pandas as pd
+
 from dash import dcc, html
 from dash_iconify import DashIconify
 
-# ==============================================================================
-# 1. GERAÇÃO DE DADOS ALEATÓRIOS (MOCK DATA)
-# ==============================================================================
+from components.processamento import DataProcessing
 
-from components import mock_data
-
-df = mock_data.gerar_dados_aleatorios()
+BASE_DIR = os.getcwd()
+FILE_PATH_DATASET = os.path.join(BASE_DIR, 'components/datasets', 'RECLAMEAQUI_HAPVIDA.csv')    
+df = DataProcessing(df=pd.read_csv(FILE_PATH_DATASET, sep=',', encoding='utf-8')).data_texto()
 
 logo = "https://unifor.br/o/unifor-theme/images/unifor-logo-horizontal-negative.svg"
 
@@ -122,27 +122,27 @@ def body():
                     justify="space-around",                                 
                     children=[                            
                         dmc.GridCol(
-                            html.Div(
+                            dmc.Card(
                                 dcc.Graph(id='grafico-dist-texto'),                                                                
                             ), span={"base": 12, "md": 6, "lg": 6}),
                         dmc.GridCol(
-                            html.Div(
+                            dmc.Card(
                                 dcc.Graph(id='grafico-serie-temporal'),                                
                             ), span={"base": 12, "md": 6, "lg": 6}),
                         dmc.GridCol(
-                            html.Div(
+                            dmc.Card(
                                 dcc.Graph(id='grafico-freq-status'),                                 
                             ), span={"base": 12, "md": 6, "lg": 6}),
                         dmc.GridCol(
-                            html.Div(                                
+                            dmc.Card(                                
                                 html.Img(id='grafico-wordcloud', className="img-fluid w-100"),                                 
                             ), span={"base": 12, "md": 6, "lg": 6}),
                         dmc.GridCol(
-                            html.Div(
+                            dmc.Card(
                                 dcc.Graph(id='mapa-brasil-heatmap'),                                 
                             ), span={"base": 12, "md": 6, "lg": 6}),
                         dmc.GridCol(
-                            html.Div(
+                            dmc.Card(
                                 dcc.Graph(id='grafico-freq-estado' ),                                 
                             ), span={"base": 12, "md": 6, "lg": 6}),                        
                     ] 
