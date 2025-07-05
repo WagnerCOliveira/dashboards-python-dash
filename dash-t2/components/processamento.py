@@ -8,6 +8,21 @@ from nltk.corpus import stopwords
 from wordcloud import WordCloud 
 
 
+class GeoJsonSingleton:
+    _instance = None    
+
+    def __new__(cls):
+
+        if cls._instance is None:
+            BASE_DIR = os.getcwd()
+            FILE_PATH_GEO_JSON = os.path.join(BASE_DIR, 'components/datasets', 'brasil_estados.json')   
+            
+            with open(FILE_PATH_GEO_JSON, 'r', encoding='utf-8') as f:
+                cls._instance = json.load(f)
+        
+        return cls._instance
+
+
 class DataProcessing:
     '''
     Faz o tratamento e processamento de um dataframe com dados
@@ -19,13 +34,16 @@ class DataProcessing:
     Gerando coluna com tamanho do texto da variavel DESCRICAO
 
     removendo linas que não tem estado
+
+    Convertendo coluna ANO para STR
     '''
 
-    def __init__(self, df):
+    def __init__(self, df):        
         
         df[['CIDADE', 'ESTADO']] = df['LOCAL'].str.split(' - ', expand=True)
-        df['TAMANHO_TEXTO'] = df['DESCRICAO'].str.len()
+        df['TAMANHO_TEXTO'] = df['DESCRICAO'].str.len()        
         df = df[~(df['ESTADO'] == '--')]
+        df['ANO'] = df['ANO'].astype(str)
 
         self.df = df
 
@@ -58,16 +76,8 @@ class DataProcessing:
         return self.df
 
 
-    def open_geo_json():
-        BASE_DIR = os.getcwd()
-        FILE_PATH_GEO_JSON = os.path.join(BASE_DIR, 'components/datasets', 'brasil_estados.json')   
+    def data_mapa(self, ano_mapa: str | None):
         
-        with open(FILE_PATH_GEO_JSON, 'r', encoding='utf-8') as f:
-            return json.load(f)
-
-
-    def data_mapa(self, ano_mapa):
-
         '''
         Completa os estados que não tem dados no dataframe com 0, 
         após groupby extrair os dados, para que o grafico de mapa
@@ -76,8 +86,9 @@ class DataProcessing:
         Adiciona a sigla e contagem em zero do estado que não tem no dataframe
 
         Adiciona nomes aos estados.
-        '''
-    
+        '''        
+
+        # Dados do estados para exibição de todos os estados mesmo sem dados do estado
         dict_estados = {
             'AC': 'Acre', 
             'AL': 'Alagoas', 
@@ -108,13 +119,15 @@ class DataProcessing:
             'TO': 'Tocantins'
         }
         
-        df_contagem_estado = self.df[self.df['ANO'] == ano_mapa].groupby('ESTADO').size().reset_index(name='CONTAGEM')
+        df_contagem_estado = self.df.loc[self.df['ANO'] == ano_mapa].groupby('ESTADO').size().reset_index(name='CONTAGEM')
 
-        for sigla in dict_estados.keys():
-            if sigla not in set(df_contagem_estado['ESTADO'].unique()):
-                df_contagem_estado.loc[len(df_contagem_estado)] = {'ESTADO': sigla, 'CONTAGEM': 0}
+        # checa de ano_mapa vem preenchido, para não exibir dados em 0.        
+        if ano_mapa:
+            for sigla in dict_estados.keys():
+                if sigla not in set(df_contagem_estado['ESTADO'].unique()):
+                    df_contagem_estado.loc[len(df_contagem_estado)] = {'ESTADO': sigla, 'CONTAGEM': 0}
                 
-        df_contagem_estado['NOME'] = df_contagem_estado['ESTADO'].map(dict_estados)
+        df_contagem_estado['NOME'] = df_contagem_estado['ESTADO'].map(dict_estados)        
         
         return df_contagem_estado
     

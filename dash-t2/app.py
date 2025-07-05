@@ -16,8 +16,9 @@ app = Dash(external_stylesheets=dmc.styles.ALL)
 app.layout = dmc.MantineProvider( 
     layout.body(),
     id="theme-provider",
+    forceColorScheme="light",
 )
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

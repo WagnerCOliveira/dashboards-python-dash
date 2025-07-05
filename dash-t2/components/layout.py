@@ -11,16 +11,6 @@ BASE_DIR = os.getcwd()
 FILE_PATH_DATASET = os.path.join(BASE_DIR, 'components/datasets', 'RECLAMEAQUI_HAPVIDA.csv')    
 df = DataProcessing(df=pd.read_csv(FILE_PATH_DATASET, sep=',', encoding='utf-8')).data_texto()
 
-logo = "https://unifor.br/o/unifor-theme/images/unifor-logo-horizontal-negative.svg"
-
-theme_toggle = dmc.Switch(
-    offLabel=DashIconify(icon="radix-icons:sun", width=15, color=dmc.DEFAULT_THEME["colors"]["yellow"][8]),
-    onLabel=DashIconify(icon="radix-icons:moon", width=15, color=dmc.DEFAULT_THEME["colors"]["yellow"][6]),
-    id="color-scheme-toggle",
-    persistence=True,
-    color="grey",
-)
-
 about = dcc.Markdown("""
     PROJETO – DASHBOARD COM DADOS DO RECLAME AQUI
     ---
@@ -50,8 +40,7 @@ def body():
                                     size="sm",
                                     hiddenFrom="sm",
                                     opened=False,
-                                ),
-                                dmc.Image(src=logo, h=50),
+                                ),                                
                                 dmc.Title("Dashboard - Reclame Aqui", c="blue"),
                             ]
                         ),
@@ -64,7 +53,7 @@ def body():
                                         dmc.HoverCardDropdown(about),
                                     ],
                                 ),
-                                theme_toggle
+                               
                             ]
                         ),
                         
@@ -161,4 +150,4 @@ def body():
         id="appshell",
     )
 
-    return dmc.MantineProvider(layout)
+    return layout
