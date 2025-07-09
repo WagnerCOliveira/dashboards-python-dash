@@ -109,31 +109,38 @@ def body():
                 dmc.Grid(
                     align="stretch",
                     justify="space-around",                                 
-                    children=[                            
-                        dmc.GridCol(
-                            dmc.Card(
-                                dcc.Graph(id='grafico-dist-texto'),                                                                
-                            ), span={"base": 12, "md": 6, "lg": 6}),
-                        dmc.GridCol(
-                            dmc.Card(
-                                dcc.Graph(id='grafico-serie-temporal'),                                
-                            ), span={"base": 12, "md": 6, "lg": 6}),
-                        dmc.GridCol(
-                            dmc.Card(
-                                dcc.Graph(id='grafico-freq-status'),                                 
-                            ), span={"base": 12, "md": 6, "lg": 6}),
-                        dmc.GridCol(
-                            dmc.Card(                                
-                                html.Img(id='grafico-wordcloud', className="img-fluid w-100"),                                 
-                            ), span={"base": 12, "md": 6, "lg": 6}),
-                        dmc.GridCol(
-                            dmc.Card(
-                                dcc.Graph(id='mapa-brasil-heatmap'),                                 
-                            ), span={"base": 12, "md": 6, "lg": 6}),
-                        dmc.GridCol(
-                            dmc.Card(
-                                dcc.Graph(id='grafico-freq-estado' ),                                 
-                            ), span={"base": 12, "md": 6, "lg": 6}),                        
+                    children=[
+                        dcc.Loading(
+                            dmc.Grid([
+                                dmc.GridCol(
+                                    dmc.Card(
+                                        dcc.Graph(id='grafico-dist-texto'),                                                                
+                                    ), span={"base": 12, "md": 6, "lg": 6}),
+                                dmc.GridCol(
+                                    dmc.Card(
+                                        dcc.Graph(id='grafico-serie-temporal'),                                
+                                    ), span={"base": 12, "md": 6, "lg": 6}),
+                                dmc.GridCol(
+                                    dmc.Card(
+                                        dcc.Graph(id='grafico-freq-status'),                                 
+                                    ), span={"base": 12, "md": 6, "lg": 6}),
+                                dmc.GridCol(
+                                    dmc.Card(                                
+                                        html.Img(id='grafico-wordcloud', className="img-fluid w-100"),                                 
+                                    ), span={"base": 12, "md": 6, "lg": 6}),
+                                dmc.GridCol(
+                                    dmc.Card(
+                                        dcc.Graph(id='mapa-brasil-heatmap'),                                 
+                                    ), span={"base": 12, "md": 6, "lg": 6}),
+                                dmc.GridCol(
+                                    dmc.Card(
+                                        dcc.Graph(id='grafico-freq-estado' ),                                 
+                                    ), span={"base": 12, "md": 6, "lg": 6}),
+                            ],
+                            gutter="xl",
+                            style={"height": 800}
+                            )
+                        ),                                                
                     ] 
                 )        
             ),

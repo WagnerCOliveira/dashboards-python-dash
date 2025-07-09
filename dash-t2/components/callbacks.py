@@ -25,24 +25,50 @@ def toggle_navbar(opened, navbar):
 def update_value_slider(value):
     return f"Selecione os valores entre: {value}"
 
+# --- Atualizar o gráfico de mappa ---
+@callback(
+    Output('mapa-brasil-heatmap', 'figure'),
+    Input('seletor-ano-mapa', 'value'),    
+)
+def atualizar_mapa(ano_mapa):
+    # Instanciando CLasse processamento dados.
+    dff_ = DataProcessing(df=df)      
+
+    # 5. Mapa do Brasil
+    #map_data = dff[dff['ANO'] == ano_mapa].groupby('ESTADO').size().reset_index(name='CONTAGEM')
+    fig_mapa = px.choropleth_mapbox(
+        dff_.data_mapa(ano_mapa=ano_mapa),
+        geojson=GeoJsonSingleton(), 
+        locations='ESTADO',         
+        color='CONTAGEM', 
+        color_continuous_scale="reds",
+        mapbox_style="carto-positron", 
+        zoom=2.5, 
+        center={"lat": -14.2350, "lon": -51.9253},
+        title=f'Reclamações em {ano_mapa}', labels={'CONTAGEM': 'Nº Reclamações'}
+    ).update_layout(title_x=0.5, margin=dict(t=50, l=0, r=0, b=0))
+
+    if ano_mapa is None:
+        return fig_mapa
+
+    return fig_mapa
 
 # --- Atualizar todos os gráficos e a WordCloud ---
 @callback(
     Output('grafico-serie-temporal', 'figure'),
     Output('grafico-freq-estado', 'figure'),
     Output('grafico-freq-status', 'figure'),
-    Output('grafico-dist-texto', 'figure'),
-    Output('mapa-brasil-heatmap', 'figure'),
+    Output('grafico-dist-texto', 'figure'),    
     Output('grafico-wordcloud', 'src'),
     Input('filtro-estado', 'value'),
     Input('filtro-status', 'value'),
     Input('filtro-tamanho-texto', 'value'),
-    Input('seletor-ano-mapa', 'value'),    
+    
 )
-def atualizar_painel(estados_selec, status_selec, faixa_tamanho, ano_mapa):
+def atualizar_painel(estados_selec, status_selec, faixa_tamanho):
     # Instanciando CLasse processamento dados.
     dff_ = DataProcessing(df=df)
-
+    # Copia DF original
     dff = dff_.data_texto()    
 
     # --- Filtragem dos Dados ---    
@@ -89,23 +115,10 @@ def atualizar_painel(estados_selec, status_selec, faixa_tamanho, ano_mapa):
         title='Distribuição do Tamanho do Texto',
         labels={'TAMANHO_TEXTO': 'Tamanho do Texto', 'count': 'Frequência'}
     ).update_layout(title_x=0.5, margin=dict(t=50, l=10, r=10, b=10))
-
-    # 5. Mapa do Brasil
-    #map_data = dff[dff['ANO'] == ano_mapa].groupby('ESTADO').size().reset_index(name='CONTAGEM')
-    fig_mapa = px.choropleth_mapbox(
-        dff_.data_mapa(ano_mapa=ano_mapa),
-        geojson=GeoJsonSingleton(), 
-        locations='ESTADO',         
-        color='CONTAGEM', 
-        color_continuous_scale="reds",
-        mapbox_style="carto-positron", 
-        zoom=2.5, 
-        center={"lat": -14.2350, "lon": -51.9253},
-        title=f'Reclamações em {ano_mapa}', labels={'CONTAGEM': 'Nº Reclamações'}
-    ).update_layout(title_x=0.5, margin=dict(t=50, l=0, r=0, b=0))                          
+                              
 
     # 6. WordCloud
        
     src_wordcloud = dff_.data_wordcloud()
 
-    return fig_serie_temporal, fig_freq_estado, fig_freq_status, fig_dist_texto, fig_mapa, src_wordcloud
+    return fig_serie_temporal, fig_freq_estado, fig_freq_status, fig_dist_texto, src_wordcloud

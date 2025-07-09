@@ -26,7 +26,7 @@ class GeoJsonSingleton:
 class DataProcessing:
     '''
     Faz o tratamento e processamento de um dataframe com dados
-    do Reclame A do HAPVIDA
+    do Reclame Aqui do HAPVIDA
 
     Divide a coluna "LOCAL" no formato 'Cidade - UF' 
     em duas colunas separadas: 'Cidade' e 'UF'.
@@ -198,7 +198,7 @@ class DataProcessing:
             'tal', 'tais', 'qualquer', 'quaisquer', 'cujo', 'cuja', 'cujos', 'cujas',
             'primeiro', 'primeira', 'segundo', 'segunda', 'último', 'última',
             'único', 'única', 'únicos', 'únicas', 'sistema', 'atende', 'momento', 'telefone',
-            'vezes'
+            'vezes', 'tentei'
         }
 
         for palavra in stopwords_planos_saude:
