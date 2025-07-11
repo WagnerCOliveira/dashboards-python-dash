@@ -51,13 +51,11 @@ Prof. Túlio Ribeiro
 
 
 Tabela de conteúdos
----
+===
 <!--ts-->   
    * [Tecnologias](#🛠-tecnologias-utilizadas)
-   * [Criação Virtualenv](#criação-virtualenv)
-   * [Instalação Pacotes](#instalação-de-pacotes)
-   * [Acessando Virtualenv](#acessando-virtualenv---wsl-linux)
-   * [Executando Aplicação](#execução-da-aplicação)
+   * [Deploy Local](#deploy-local)
+   * [Deploy Heroku](#deploy-heroku)
    * [Codigo](#código)     
    * [Referências](#referências)
    * [Contribuição](#contribuição)
@@ -66,15 +64,17 @@ Tabela de conteúdos
 <!--te-->
 
 🛠 Tecnologias Utilizadas
----
+===
 As seguintes ferramentas foram usadas na construção do projeto:
 
 - [Python 3.13.0](https://docs.python.org/pt-br/3/)
 - [dash==2.18.2](https://dash.plotly.com/)
 - [dash_mantine_components==0.15.3](https://www.dash-mantine-components.com/)
 
-Criação Virtualenv
----
+Deploy Local
+===
+
+1. Criação Virtualenv
 
 
 ~~~bash
@@ -82,8 +82,8 @@ python3 -m venv .venv
 ~~~
 
 
-Acessando Virtualenv - WSL, Linux
----
+2. Acessando Virtualenv - WSL, Linux
+
 
 
 ~~~bash
@@ -91,8 +91,7 @@ source .venv/bin/activate
 ~~~
 
 
-Acessando Virtualenv - Windows
----
+3. Acessando Virtualenv - Windows
 
 
 ~~~bash
@@ -100,20 +99,69 @@ Acessando Virtualenv - Windows
 ~~~
 
 
-Instalação de Pacotes
----
+4. Instalação de Pacotes
 
 
 ~~~bash
 python -m pip install -r requirements.txt
 ~~~
 
-Execução da Aplicação
----
+5. Execução da Aplicação
+
 
 ~~~python
 cd dash-t2
 python app.py
+~~~
+
+Deploy Heroku
+===
+
+1. Autenticação no Heroku
+
+Faça login na sua conta Heroku através do terminal:
+
+~~~python
+heroku login
+~~~
+Isso abrirá uma janela no seu navegador para você autenticar.
+
+2. Adicione Seus Arquivos ao Git
+Adicione todos os arquivos da sua aplicação:
+
+~~~bash
+git add .
+~~~
+
+3. Faça o Primeiro Commit
+
+Comite os arquivos adicionados:
+
+~~~bash
+git commit -m "first commit"
+~~~
+
+4. Crie uma Aplicação Heroku
+
+Crie um novo aplicativo no Heroku. Você pode especificar um nome ou deixar o Heroku gerar um:
+
+~~~python
+heroku create nome-do-seu-app
+~~~
+
+5. Faça o Deploy para o Heroku
+
+Envie seu código para o Heroku. A plataforma detectará que é uma aplicação Python, instalará as dependências e iniciará sua aplicação.
+
+~~~bash
+git push heroku master
+~~~
+6. Abra Sua Aplicação
+
+Após o sucesso do deploy, abra sua aplicação no navegador:
+
+~~~python
+heroku open
 ~~~
 
 Código

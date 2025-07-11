@@ -30,4 +30,4 @@ RUN  pip install --no-cache-dir -r requirements.txt
 
 COPY ./dash-t2 .
 
-CMD [ "python", "./app.py" ]
+CMD [ "gunicorn", "app:server", "--bind", "0.0.0.0:8050" ]
