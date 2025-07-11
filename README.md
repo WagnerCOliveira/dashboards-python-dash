@@ -1,4 +1,4 @@
-📌 PROJETO – DASHBOARD COM DADOS DO RECLAME AQUI
+PROJETO – DASHBOARD COM DADOS DO RECLAME AQUI
 ===
 
 MBA em Ciência de Dados – Disciplina: Dashboards em Python
@@ -50,7 +50,7 @@ Prof. Túlio Ribeiro
 
 
 
-Tabela de conteúdos
+📌 Tabela de conteúdos
 ===
 <!--ts-->   
    * [Tecnologias](#🛠-tecnologias-utilizadas)
@@ -63,7 +63,7 @@ Tabela de conteúdos
    * [Licença](#licença)
 <!--te-->
 
-🛠 Tecnologias Utilizadas
+⚙️ Tecnologias Utilizadas
 ===
 As seguintes ferramentas foram usadas na construção do projeto:
 
@@ -71,7 +71,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [dash==2.18.2](https://dash.plotly.com/)
 - [dash_mantine_components==0.15.3](https://www.dash-mantine-components.com/)
 
-Deploy Local
+🏃 Deploy Local
 ===
 
 1. Criação Virtualenv
@@ -114,7 +114,7 @@ cd dash-t2
 python app.py
 ~~~
 
-Deploy Heroku
+🏃 Deploy Heroku
 ===
 
 1. Autenticação no Heroku
@@ -164,12 +164,16 @@ Após o sucesso do deploy, abra sua aplicação no navegador:
 heroku open
 ~~~
 
-Código
+🚀 Código
 ---
 
-Trabalhando nisso !!!
+1. [Documentação app.py](https://github.com/WagnerCOliveira/dashboards-python-dash/blob/main/docs/app.md)
+2. [Documentação layout.py](https://github.com/WagnerCOliveira/dashboards-python-dash/blob/main/docs/layout.md)
+3. [Documentação callbaks.py](https://github.com/WagnerCOliveira/dashboards-python-dash/blob/main/docs/callbacks.md)
+4. [Documentação processamento.py](https://github.com/WagnerCOliveira/dashboards-python-dash/blob/main/docs/processamento.md)
 
-Referências
+
+⚙️ Referências
 ---
 
 - [Python Documentação](https://docs.python.org/pt-br/3/)
@@ -177,21 +181,21 @@ Referências
 - [Dash Mantine](https://www.dash-mantine-components.com/)
 
 
-Contribuições
+🤝 Contribuições
 ---
 
 - Emerson da Silva Maciel
 - Victor Lamark Costa Brasil
 - Wagner da Costa Oliveira
 
-Autores
+✨ Autores
 ---
 
 - Emerson da Silva Maciel
 - Victor Lamark Costa Brasil
 - Wagner da Costa Oliveira
 
-Licença
+📄 Licença
 ---
 
 - [GNU General Public License (GPL)](https://www.gnu.org/licenses/gpl-3.0.html)
