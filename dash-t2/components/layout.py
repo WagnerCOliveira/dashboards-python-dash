@@ -130,15 +130,15 @@ def body():
                                     ), span={"base": 12, "md": 6, "lg": 6}),
                                 dmc.GridCol(
                                     dmc.Card(
-                                        dcc.Graph(id='mapa-brasil-heatmap'),                                 
+                                        id='mapa-brasil-heatmap',
                                     ), span={"base": 12, "md": 6, "lg": 6}),
                                 dmc.GridCol(
                                     dmc.Card(
                                         dcc.Graph(id='grafico-freq-estado' ),                                 
                                     ), span={"base": 12, "md": 6, "lg": 6}),
                             ],
-                            gutter="xl",
-                            style={"height": 800}
+                            gutter="md",
+                            
                             )
                         ),                                                
                     ] 

@@ -25,7 +25,7 @@ RUN apk update && \
         openblas-dev && \
     rm -rf /var/cache/apk/* 
 
-COPY requirements.txt ./
+COPY ./dash-t2/requirements.txt ./
 RUN  pip install --no-cache-dir -r requirements.txt
 
 COPY ./dash-t2 .

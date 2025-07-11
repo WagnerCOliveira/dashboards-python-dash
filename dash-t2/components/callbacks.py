@@ -1,14 +1,24 @@
 import os
 import pandas as pd
-
+import folium
 import plotly.express as px
-from dash import callback, Output, Input, State, clientside_callback
+import geopandas as gpd
+
+from folium import plugins
+from dash import callback, Output, Input, State, clientside_callback, html
 
 from components.processamento import DataProcessing, GeoJsonSingleton
 
 BASE_DIR = os.getcwd()
+# Carregando dados brutos
+print('>>> Carregando dados brutos !!! <<<')
 FILE_PATH_DATASET = os.path.join(BASE_DIR, 'components/datasets', 'RECLAMEAQUI_HAPVIDA.csv')    
 df = pd.read_csv(FILE_PATH_DATASET, sep=',', encoding='utf-8')
+print('>>> Carregando Geo Json !!! <<<')
+# Carregando Geojson
+FILE_PATH_GEOJSON = os.path.join(BASE_DIR, 'components/datasets', 'brasil_estados.json')
+gdf = gpd.read_file(FILE_PATH_GEOJSON)
+gdf = gdf.to_crs(epsg=4326)
 
 # Habilitar menu mobile
 @callback(
@@ -27,7 +37,7 @@ def update_value_slider(value):
 
 # --- Atualizar o gráfico de mappa ---
 @callback(
-    Output('mapa-brasil-heatmap', 'figure'),
+    Output('mapa-brasil-heatmap', 'children'),
     Input('seletor-ano-mapa', 'value'),    
 )
 def atualizar_mapa(ano_mapa):
@@ -36,6 +46,7 @@ def atualizar_mapa(ano_mapa):
 
     # 5. Mapa do Brasil
     #map_data = dff[dff['ANO'] == ano_mapa].groupby('ESTADO').size().reset_index(name='CONTAGEM')
+    ''' 
     fig_mapa = px.choropleth_mapbox(
         dff_.data_mapa(ano_mapa=ano_mapa),
         geojson=GeoJsonSingleton(), 
@@ -47,11 +58,62 @@ def atualizar_mapa(ano_mapa):
         center={"lat": -14.2350, "lon": -51.9253},
         title=f'Reclamações em {ano_mapa}', labels={'CONTAGEM': 'Nº Reclamações'}
     ).update_layout(title_x=0.5, margin=dict(t=50, l=0, r=0, b=0))
+    '''
+    
+    output_html_none = os.path.join(BASE_DIR, 'components/assets', 'mapa_brasil_none.html')
+    output_html_file = os.path.join(BASE_DIR, 'components/assets', 'mapa_brasil_file.html')
 
+    fig_mapa_folium = html.Iframe(
+            srcDoc = open(output_html_none, 'r').read(),
+            style={'width': '44rem', 'height': '26rem'},
+            )
+    
     if ano_mapa is None:
-        return fig_mapa
-
-    return fig_mapa
+        fig_mapa = folium.Map(
+                location=[-15.77972, -47.92972],
+                width=700, 
+                height=400,
+                zoom_start=3
+            )        
+        fig_mapa.save(output_html_none)
+        
+        return fig_mapa_folium
+    
+    fig_mapa_folium = html.Iframe(
+            srcDoc = open(output_html_file, 'r').read(),
+            style={'width': '44rem', 'height': '26rem'},
+            )
+    
+    fig_mapa = folium.Map(
+                location=[-15.77972, -47.92972],
+                width=700, 
+                height=400,
+                zoom_start=3
+            )
+    folium.Choropleth(
+                geo_data=gdf.__geo_interface__,
+                name='Estados do Brasil',
+                data= dff_.data_mapa(ano_mapa=ano_mapa),
+                columns=['ESTADO', 'CONTAGEM'],                                         
+                key_on='feature.properties.id', 
+                fill_color='Blues', 
+                fill_opacity=0.7,
+                line_opacity=0.2,
+                legend_name='Legenda dos Estados',
+                highlight=True 
+            ).add_to(fig_mapa)
+        
+    folium.plugins.Fullscreen(
+            position="bottomright",
+            title="Maximixe",
+            title_cancel="Sair",
+            force_separate_button=True,
+        ).add_to(fig_mapa)
+        
+    folium.LayerControl().add_to(fig_mapa)   
+           
+    fig_mapa.save(output_html_file)
+    return fig_mapa_folium
 
 # --- Atualizar todos os gráficos e a WordCloud ---
 @callback(

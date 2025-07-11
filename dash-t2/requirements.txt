@@ -2,6 +2,7 @@ annotated-types==0.7.0
 asttokens==3.0.0
 attrs==25.3.0
 blinker==1.9.0
+branca==0.8.1
 certifi==2025.6.15
 charset-normalizer==3.4.2
 click==8.2.1
@@ -22,6 +23,7 @@ decorator==5.2.1
 executing==2.2.0
 fastjsonschema==2.21.1
 Flask==3.0.3
+folium==0.20.0
 fonttools==4.58.4
 geopandas==1.1.1
 gunicorn==23.0.0
@@ -90,4 +92,5 @@ urllib3==2.5.0
 wcwidth==0.2.13
 Werkzeug==3.0.6
 wordcloud==1.9.4
+xyzservices==2025.4.0
 zipp==3.23.0
