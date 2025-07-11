@@ -63,7 +63,7 @@ Prof. Túlio Ribeiro
    * [Licença](#licença)
 <!--te-->
 
-⚙️ Tecnologias Utilizadas
+Tecnologias Utilizadas
 ===
 As seguintes ferramentas foram usadas na construção do projeto:
 
@@ -71,7 +71,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [dash==2.18.2](https://dash.plotly.com/)
 - [dash_mantine_components==0.15.3](https://www.dash-mantine-components.com/)
 
-🏃 Deploy Local
+Deploy Local
 ===
 
 1. Criação Virtualenv
@@ -114,7 +114,7 @@ cd dash-t2
 python app.py
 ~~~
 
-🏃 Deploy Heroku
+Deploy Heroku
 ===
 
 1. Autenticação no Heroku
@@ -164,7 +164,7 @@ Após o sucesso do deploy, abra sua aplicação no navegador:
 heroku open
 ~~~
 
-🚀 Código
+Código
 ---
 
 1. [Documentação app.py](https://github.com/WagnerCOliveira/dashboards-python-dash/blob/main/docs/app.md)
@@ -173,7 +173,7 @@ heroku open
 4. [Documentação processamento.py](https://github.com/WagnerCOliveira/dashboards-python-dash/blob/main/docs/processamento.md)
 
 
-⚙️ Referências
+Referências
 ---
 
 - [Python Documentação](https://docs.python.org/pt-br/3/)
@@ -181,21 +181,21 @@ heroku open
 - [Dash Mantine](https://www.dash-mantine-components.com/)
 
 
-🤝 Contribuições
+Contribuições
 ---
 
 - Emerson da Silva Maciel
 - Victor Lamark Costa Brasil
 - Wagner da Costa Oliveira
 
-✨ Autores
+Autores
 ---
 
 - Emerson da Silva Maciel
 - Victor Lamark Costa Brasil
 - Wagner da Costa Oliveira
 
-📄 Licença
+Licença
 ---
 
 - [GNU General Public License (GPL)](https://www.gnu.org/licenses/gpl-3.0.html)
